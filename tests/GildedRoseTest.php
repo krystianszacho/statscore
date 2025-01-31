@@ -1,23 +1,19 @@
 <?php
 
-use App\GildedRose;
+namespace Tests;
+
 use App\Model\Item;
+use App\Service\GildedRose;
 use PHPUnit\Framework\TestCase;
 
 class GildedRoseTest extends TestCase
 {
     /**
      * @dataProvider itemsProvider
-     * @param string $name
-     * @param int $sellIn
-     * @param int $quality
-     * @param int $expectedSellIn
-     * @param int $expectedQuality
      */
-    public function testUpdateQualityTest($name, $sellIn, $quality, $expectedSellIn, $expectedQuality): void
+    public function testUpdateQualityTest(string $name, int $sellIn, int $quality, int $expectedSellIn, int $expectedQuality): void
     {
         $item = new Item($name, $sellIn, $quality);
-
         $gildedRose = new GildedRose();
         $gildedRose->updateQuality($item);
 
