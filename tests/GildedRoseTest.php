@@ -1,7 +1,7 @@
 <?php
 
 use App\GildedRose;
-use App\Item;
+use App\Model\Item;
 use PHPUnit\Framework\TestCase;
 
 class GildedRoseTest extends TestCase
