@@ -11,18 +11,18 @@ class BackstagePassStrategy implements QualityStrategyInterface
     {
         $item->sell_in--;
 
-        if ($item->sell_in < 0) {
-            $item->quality = 0;
-            return;
-        }
+        $item->quality = ($item->sell_in < 0)
+            ? 0
+            : min(50, $item->quality + $this->getQualityIncrease($item->sell_in));
+    }
 
-        $increment = 1;
-        if ($item->sell_in < 5) {
-            $increment = 3;
-        } elseif ($item->sell_in < 10) {
-            $increment = 2;
-        }
-
-        $item->quality = min(50, $item->quality + $increment);
+    private function getQualityIncrease(int $sellIn): int
+    {
+        return match (true) {
+            $sellIn < 0  => 0,
+            $sellIn < 5  => 3,
+            $sellIn < 10 => 2,
+            default      => 1,
+        };
     }
 }
